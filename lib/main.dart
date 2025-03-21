@@ -101,42 +101,48 @@ class _BoardingScreenState extends State<BoardingScreen> {
   Widget build(BuildContext context) {
     int score = calculateScore();
     return Scaffold(
-      appBar: AppBar(title: Text('Boarding Manager')),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(title: Text('Boarding Manager')),
+        body: SingleChildScrollView(
+            child: SizedBox(
+          height: 720,
+          child: Column(
             children: [
-              Text("Time left: $_timeLeft s", style: TextStyle(fontSize: 24)),
-              IconButton(icon: Icon(Icons.play_arrow), onPressed: _startTimer),
-              IconButton(icon: Icon(Icons.pause), onPressed: _pauseTimer),
-              IconButton(icon: Icon(Icons.refresh), onPressed: _resetTimer),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Time left: $_timeLeft s",
+                      style: TextStyle(fontSize: 24)),
+                  IconButton(
+                      icon: Icon(Icons.play_arrow), onPressed: _startTimer),
+                  IconButton(icon: Icon(Icons.pause), onPressed: _pauseTimer),
+                  IconButton(icon: Icon(Icons.refresh), onPressed: _resetTimer),
+                ],
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: Column(
+                  children: [
+                    _buildBoardingArea(),
+                    _buildDelayArea(),
+                    _buildMissingPassengersArea(),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          Text(getScoreEmoji(score),
+                              style: TextStyle(fontSize: 40)),
+                          Text("Passengers Agony: $score",
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-          SizedBox(height: 20),
-          Expanded(
-            child: Column(
-              children: [
-                _buildBoardingArea(),
-                _buildDelayArea(),
-                _buildMissingPassengersArea(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text(getScoreEmoji(score), style: TextStyle(fontSize: 40)),
-                Text("Passengers Agony: $score",
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+        )));
   }
 
   Widget _buildBoardingArea() {
