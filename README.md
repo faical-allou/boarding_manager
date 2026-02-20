@@ -26,3 +26,6 @@ Final formula
 Passengers Agony = (sum of all stress cells)
                  + 10 * (number of delayed colors)
                  + 20 * (sum of missed counters)
+
+Hosted here: https://boarding-manager.web.app/
+
